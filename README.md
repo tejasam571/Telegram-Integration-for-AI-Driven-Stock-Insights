@@ -1,112 +1,130 @@
-📈 #AI-Powered Day Trading Agent with n8n
-Fully automated stock analysis and trade recommendation bot using Telegram, OpenAI, TwelveData API, and Newsdata API — no self-hosting required.
+# 📈 AI-Powered Day Trading Agent with n8n
 
-✅ What This Project Does
-This project builds an AI Agent that:
+Fully automated stock analysis and trade recommendation bot using **Telegram**, **OpenAI**, **TwelveData API**, and **Newsdata API** — no self-hosting required.
 
-Accepts a stock symbol via Telegram (e.g., TSLA)
+---
 
-Retrieves recent candlestick data and news sentiment
+## ✅ What This Project Does
 
-Analyzes technical indicators (RSI, MACD)
+This project builds an **AI Agent** that:
 
-Uses OpenAI to generate trade signals (Buy/Sell/Hold) with:
+- Accepts a stock symbol via **Telegram** (e.g., `TSLA`)
+- Retrieves recent **candlestick data** and **news sentiment**
+- Analyzes technical indicators (**RSI**, **MACD**)
+- Uses **OpenAI** to generate trade signals:  
+  ➤ Buy / Sell / Hold  
+  ➤ Entry Price  
+  ➤ Stop Loss  
+  ➤ Target Exit Price  
+- Sends the final recommendation back to Telegram – **in real time**
 
-Entry Price
+---
 
-Stop Loss
+## ⚙️ Tech Stack Used
 
-Target Exit Price
+- **n8n** – no-code workflow automation platform
+- **Telegram Bot** – user interface for input/output
+- **TwelveData API** – fetch real-time candlestick data
+- **Newsdata.io API** – fetch latest news articles
+- **OpenAI API (GPT-4.1)** – evaluate sentiment & generate trade recommendations
+- **JavaScript (inside n8n)** – data cleaning, aggregation & formatting
 
-Sends final recommendation back to Telegram – in real time!
+---
 
-⚙️ Tech Stack Used
-n8n – no-code workflow automation platform
+## 🧠 How It Works — Step-by-Step
 
-Telegram Bot – User interface for input/output
+### 1. Telegram Trigger
+- User sends a message like `TSLA` (stock ticker) in Telegram  
+- This triggers the **n8n workflow** instantly
 
-TwelveData API – To fetch real-time candlestick data
+### 2. Fetch Candlestick Data
+- n8n sends 3 parallel HTTP requests to TwelveData API to retrieve:
+  - 1-minute candles
+  - 15-minute candles
+  - 1-hour candles
+- Each API returns OHLCV data (Open, High, Low, Close, Volume)
 
-Newsdata.io API – To get latest news articles about the stock
+### 3. Merge & Structure Candlestick Data
+- A **Merge** node combines all 3 timeframes
+- **Aggregate** node organizes the data
+- A **JavaScript Code** node formats it for AI input
 
-OpenAI API (GPT-4.1) – To evaluate sentiment and generate trade recommendations
+### 4. Fetch News Articles
+- The ticker is passed to **Newsdata.io API**
+- Retrieves latest news (last 24 hours)
+- Data is cleaned using JavaScript to keep:
+  - Headline
+  - Date
+  - Description
 
-JavaScript (in n8n) – For data cleaning, aggregation, and formatting
+### 5. Analyze News Sentiment
+- Headlines sent to **OpenAI GPT-4.1** via Chat node
+- Model classifies each article as:
+  - Positive
+  - Neutral
+  - Negative
+- Returns reasoning behind classification
 
-🧠 How It Works — Step-by-Step
-1. Telegram Trigger
-User sends a message like TSLA (stock ticker) in Telegram.
+### 6. Aggregate Sentiment + Candlestick Data
+- Another **Merge** node combines:
+  - Candlestick analysis
+  - News sentiment summary
+- Final structured format is created
 
-This triggers the n8n workflow instantly.
+### 7. AI Agent Trade Decision
+- Combined data passed to OpenAI again
+- AI generates decision prompt:  
+  _"Based on this data, should I Buy/Sell/Hold this stock?"_
+- Includes: **entry price, stop loss, target price**
 
-2. Fetch Candlestick Data
-n8n sends 3 parallel HTTP requests to TwelveData API to retrieve:
+### 8. Send Back to Telegram
+- AI recommendation sent back to the user via Telegram
 
-1-minute candles
-
-15-minute candles
-
-1-hour candles
-
-Each API call returns OHLCV (Open, High, Low, Close, Volume) data.
-
-3. Merge & Structure Candlestick Data
-A Merge node combines all 3 timeframes.
-
-Aggregate node arranges them into a single object.
-
-A JavaScript Code node formats this data to be AI-ready.
-
-4. Fetch News Articles
-The stock ticker is passed to the Newsdata API.
-
-This fetches the last 24 hours of news about the company.
-
-The data is passed through another JavaScript node to clean up unwanted metadata and keep only:
-
-Headline
-
-Date
-
-Description
-
-5. Analyze News Sentiment
-The cleaned news headlines are sent to OpenAI (GPT-4.1) using a Chat node in n8n.
-
-The model evaluates each article as:
-
-Positive
-
-Neutral
-
-Negative
-
-Output includes a rationale to support the classification.
-
-6. Aggregate Sentiment + Candlestick Data
-Another Merge node combines:
-
-News sentiment summary
-
-Candlestick data
-
-The final structured data contains:
-
-Stock ticker
-
-All timeframes' candles
-
-News sentiment count and score
-
-7. AI Agent Trade Decision
-The combined data is passed into a new OpenAI GPT-4.1 prompt.
-
-The AI is prompted with:
-
-“Based on this data, should I Buy/Sell/Hold this stock?”
-
-“Give entry, stop loss, and target prices.”
-
-The model generates a clean, concise trade signal.
+#### 🧾 Example Output
 
 
+<img width="871" height="167" alt="Screenshot 2025-07-13 011938" src="https://github.com/user-attachments/assets/ebe01275-c78e-4d44-90f5-7eeb2148708a" />
+
+---
+
+## 📌 Key Highlights
+
+- 🔁 **Real-time interaction** — no cloud hosting needed
+- ✅ Simple **API integration** (TwelveData, Newsdata, OpenAI)
+- 🧠 AI-powered, **customizable** workflow via n8n
+- 🧩 **Modular design** — easily add indicators or exchanges
+- 💬 Works **entirely through Telegram**
+
+---
+
+## 📥 How to Use (Quick Setup)
+
+1. **Create a Telegram bot** via [BotFather](https://t.me/BotFather)
+2. Connect it in n8n using the **Telegram Trigger** node
+3. Get API keys:
+   - [TwelveData](https://twelvedata.com/)
+   - [Newsdata.io](https://newsdata.io/)
+   - [OpenAI](https://platform.openai.com/)
+4. Import the `AI_Trader_Workflow.json` into n8n
+5. Add your API keys to the HTTP request nodes
+6. Send stock tickers like `AAPL` or `TSLA` via Telegram — and receive recommendations!
+
+---
+
+## 🧠 Visual Overview
+
+![Workflow Diagram](https://github.com/user-attachments/assets/ebe01275-c78e-4d44-90f5-7eeb2148708a)
+
+---
+
+## 🤝 Let’s Collaborate
+
+If you're exploring AI agents or trading bots using **n8n**, feel free to connect or fork this repo!  
+DM or open an issue if you need help with setup or want the `.json` file.
+
+---
+
+## 🔖 Tags
+
+#n8n #AItrading #OpenAI #GPT4 #TelegramBot #NoCode #StockMarket  
+#Fintech #NewsSentiment #DayTrading #Automation #TejasLearnsAI
