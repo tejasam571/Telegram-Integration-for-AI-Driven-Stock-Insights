@@ -112,8 +112,14 @@ This project builds an **AI Agent** that:
 ---
 
 ## 🧠 Visual Overview
+![WhatsApp Image 2025-07-13 at 00 44 32_4f0c4339](https://github.com/user-attachments/assets/6d536300-e94d-4269-9b98-233c19cfd5eb)
 
-![Workflow Diagram](https://github.com/user-attachments/assets/ebe01275-c78e-4d44-90f5-7eeb2148708a)
+![WhatsApp Image 2025-07-13 at 00 46 23_e6935801](https://github.com/user-attachments/assets/3735c53e-6567-418b-80a2-db770906976e)
+
+![WhatsApp Image 2025-07-13 at 00 48 01_79b33ec5](https://github.com/user-attachments/assets/5c0d63c7-f394-4b49-87c9-8927f9c70dd4)
+
+<img width="3560" height="3312" alt="Building a Profitable AI Day Trading Agent" src="https://github.com/user-attachments/assets/8a264012-abfb-4241-9926-11a51cd4555e" />
+
 
 ---
 
