@@ -1,7 +1,7 @@
-##📈 AI-Powered Day Trading Agent with n8n
+📈 #AI-Powered Day Trading Agent with n8n
 Fully automated stock analysis and trade recommendation bot using Telegram, OpenAI, TwelveData API, and Newsdata API — no self-hosting required.
 
-#✅ What This Project Does
+✅ What This Project Does
 This project builds an AI Agent that:
 
 Accepts a stock symbol via Telegram (e.g., TSLA)
