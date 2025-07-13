@@ -121,6 +121,12 @@ This project builds an **AI Agent** that:
 <img width="3560" height="3312" alt="Building a Profitable AI Day Trading Agent" src="https://github.com/user-attachments/assets/8a264012-abfb-4241-9926-11a51cd4555e" />
 
 
+
+
+https://github.com/user-attachments/assets/b3652f76-4e72-4c67-8080-c7ab50858d39
+
+
+
 ---
 
 ## 🤝 Let’s Collaborate
